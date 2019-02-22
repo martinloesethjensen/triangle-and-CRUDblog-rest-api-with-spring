@@ -30,3 +30,8 @@ mvnw
 mvnw.cmd
 pom.xml
 
+src/main/java/api/rest/martin/restfulapiwithspring/View/
+src/main/resources/static/
+src/main/resources/templates/
+src/main/java/api/rest/martin/restfulapiwithspring/Model/ImageModel.java
+src/main/resources/application.properties
