@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TriangleRestController {
 
-
 	/**
 	 * There is assigned default values of -1 on all sides
 	 * unless an query has been typed in the path of the url.

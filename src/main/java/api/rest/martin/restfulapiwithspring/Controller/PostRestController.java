@@ -1,6 +1,5 @@
 package api.rest.martin.restfulapiwithspring.Controller;
 
-import api.rest.martin.restfulapiwithspring.Model.Comment;
 import api.rest.martin.restfulapiwithspring.Model.Post;
 import api.rest.martin.restfulapiwithspring.Repositories.CommentRepo;
 import api.rest.martin.restfulapiwithspring.Repositories.PostRepo;
@@ -19,6 +18,13 @@ public class PostRestController {
 	@Autowired
 	CommentRepo commentRepo;
 
+	/**
+	 * Gets the post from the database.
+	 *
+	 * @return ResponseEntity<Post>
+	 *
+	 * @param id
+	 * */
 	@GetMapping("/api/post/{id}")
 	public ResponseEntity<Post> getPost(@PathVariable("id") Long id) {
 		if (!postRepo.existsById(id)) {
@@ -27,6 +33,14 @@ public class PostRestController {
 		return new ResponseEntity<>(postRepo.findPostById(id), HttpStatus.OK);
 	}
 
+	/**
+	 * Create a new post and save it to the databse.
+	 *
+	 * @return ResponseEntity<Post>
+	 *
+	 * @param author
+	 * @param data
+	 * */
 	@GetMapping("/api/post/create")
 	public ResponseEntity<Post> createPost(
 			@RequestParam(defaultValue = "{{data}}") String data,
@@ -36,6 +50,13 @@ public class PostRestController {
 		return new ResponseEntity<>(postRepo.save(new Post(data, author)), HttpStatus.OK);
 	}
 
+	/**
+	 * Deletes a post and all it's related comments from the database.
+	 *
+	 * @return ResponseEntity<String>
+	 *
+	 * @param post_Id
+	 * */
 	@GetMapping("/api/post/delete/{id}")
 	public ResponseEntity<String> deletePost(@PathVariable("id") Long post_Id) {
 		if (!postRepo.existsById(post_Id)) {
@@ -45,15 +66,22 @@ public class PostRestController {
 		Post post = postRepo.findPostById(post_Id);
 
 		// Delete Comments related to the post before deleting the post
-		for (Comment comment : post.getComments()) {
-			commentRepo.delete(comment);
-		}
+		commentRepo.deleteAll(post.getComments());
 
 		postRepo.delete(post);
 
 		return new ResponseEntity<>("Deleted post with id: " + post_Id, HttpStatus.OK);
 	}
 
+	/**
+	 * Updates a post and saves it to the database.
+	 *
+	 * @return ResponseEntity<Post>
+	 *
+	 * @param id
+	 * @param data
+	 * @param author
+	 * */
 	@GetMapping("/api/post/update/{id}")
 	public ResponseEntity<Post> updatePost(@PathVariable("id") Long id,
 	                                       @RequestParam(defaultValue = "{{data}}") String data,
@@ -70,5 +98,4 @@ public class PostRestController {
 
 		return new ResponseEntity<>(postRepo.save(post), HttpStatus.OK);
 	}
-
 }

@@ -41,8 +41,8 @@ public class Comment {
 		return date;
 	}
 
-	public void setDate(LocalDateTime date) {
-		this.date = date;
+	public void setDate() {
+		this.date = LocalDateTime.now();
 	}
 
 	public String getData() {
@@ -59,7 +59,7 @@ public class Comment {
 				"id=" + id +
 				", name='" + name + '\'' +
 				", date=" + date +
-				", data='" + data + '\'' +
+				", data='" + data +
 				'}';
 	}
 }
