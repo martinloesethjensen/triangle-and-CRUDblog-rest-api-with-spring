@@ -1,7 +1,7 @@
 # triangle-and-CRUDblog-restful-api-with-spring 
 This is a simple api to check a triangle type and also a blog api. The blog api handles CRUD for making post and comments for posts.
 
-Before starting you should add spring boog, mysql and jpa dependencies. This is because we will connect to an mysql database locally and use jpa to read and make changes to the database.
+Before starting you should add spring boot, mysql and jpa dependencies. This is because we will connect to an mysql database locally and use jpa to read and make changes to the database.
 
 When you have run the application once, you'll have to put some data in your database.
 
